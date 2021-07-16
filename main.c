@@ -198,6 +198,30 @@ Matrix* get_Row(Matrix *m,int row)
     return NULL;    
 }
 
+int get(Matrix *m,int row,int col)
+{
+    // Getting the Specific Row
+    Matrix *temp=get_Row(m,row);
+
+    // If no Row is returned then we throw an error and exit(0)
+    if(temp==NULL)
+    {
+        printf("\n\nRow does not exist!\n");
+        exit(0);
+    }
+
+    // Traversing thorugh the columns and checking whether it is the required one
+    for(int i=0;i<temp->col_nums;i++)
+    {
+        if(i==col)
+        return temp->cols[i];
+    }
+
+    // If no columns are returned till now,then we throw an error and exit(0)
+    printf("\n\nColumn does not exist in the Specific Row!\n");
+    exit(0);
+}
+
 
 // Driver Code
 int main()
@@ -226,6 +250,7 @@ int main()
     }
     printf("\n");
 
+    printf("\n\n%d is the get method result\n\n",get(mat1,2,2));
     Print_Matrix(add(mat1,mat2));
     Print_Matrix(subtract(mat1,mat2));
 
