@@ -63,7 +63,7 @@ bool append_Row(Matrix **m,int col_count,int *arr)
 
         for(int i=0;i<col_count;i++)
         {
-            printf("Enter mat[%d][%d]:",rowNum-1,i);
+            printf("Enter mat[%d][%d]:",rowNum,i);
             scanf("%d",&(temp[i]));
         }
 
@@ -175,24 +175,60 @@ Matrix* subtract(Matrix *m1,Matrix*m2)
     return instance;
 }
 
+Matrix* get_Row(Matrix *m,int row)
+{   
+    printf("%d",m->col_nums);
+    int i;
 
+    // traversing until i==row and we do not reach the end of the rows
+    for(i=0;m;i++)
+    {
+        if(i==row)
+        {
+            return m;
+        }
+
+
+        m=m->next;
+    }
+
+    // If we reach the end if the list and still not returned,then obviously the row_number os wrong for the given matrix, and so we return false
+
+    if(!m)
+    return NULL;    
+}
+
+
+// Driver Code
 int main()
 {
     Matrix *mat1=NULL,*mat2=NULL;
 
     for(int i=0;i<4;i++)
     {
-        append_Row(&mat1,i,NULL);
+        append_Row(&mat1,i+1,NULL);
     }
 
 
     for(int i=0;i<4;i++)
     {
-        append_Row(&mat2,i,NULL);
+        append_Row(&mat2,i+1,NULL);
     }
+
+    Print_Matrix(mat1);
+    printf("\n");
+    Print_Matrix(mat2);
+
+    Matrix *te=get_Row(mat1,2);
+    for(int i=0;i<te->col_nums;i++)
+    {
+        printf("%d ",te->cols[i]);
+    }
+    printf("\n");
 
     Print_Matrix(add(mat1,mat2));
     Print_Matrix(subtract(mat1,mat2));
+
 
     return 0;   
 }
